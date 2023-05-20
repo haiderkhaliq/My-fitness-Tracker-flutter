@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../components/reusable_card.dart';
@@ -9,10 +8,7 @@ import '../exercise pages/Shoulders.dart';
 import '../exercise pages/back.dart';
 import '../exercise pages/chest.dart';
 import '../exercise pages/triceps.dart';
-
-
-
-
+String exer='';
 class exercises extends StatefulWidget {
   @override
   State<exercises> createState() => _exercisesState();
@@ -32,6 +28,13 @@ class _exercisesState extends State<exercises> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Expanded(
+            child: ReusableCard(
+              cardChild: Text(
+                "$exer",
+              ),
+            ),
+          ),
           Expanded(
             child: Row(
               children: [

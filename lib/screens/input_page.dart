@@ -1,14 +1,14 @@
+import 'package:final_project/screens/Exercises.dart';
 import 'package:final_project/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../calculator_brain.dart';
 import '../components/bottom_button.dart';
 import '../components/icon_content.dart';
 import '../components/reusable_card.dart';
 import '../components/round_icon_button.dart';
 import '../constants.dart';
-
+int age1=0;
 enum Gender {
   male,
   female,
@@ -201,6 +201,14 @@ class _InputPageState extends State<InputPage> {
                                   setState(
                                     () {
                                       age--;
+                                      age1=age;
+                                      if(age1>50)
+                                      {
+                                        exer="Do lightweight exercises since you are above 50";
+                                      }
+                                      else{
+                                        exer="you can do heavyweight exercise according to your age";
+                                      }
                                     },
                                   );
                                 },
@@ -213,6 +221,14 @@ class _InputPageState extends State<InputPage> {
                                   onPressed: () {
                                     setState(() {
                                       age++;
+                                      age1=age;
+                                      if(age1>50)
+                                        {
+                                          exer="Do lightweight exercises since you are above 50";
+                                        }
+                                      else{
+                                        exer="you can do heavyweight exercise according to your age";
+                                      }
                                     });
                                   })
                             ],

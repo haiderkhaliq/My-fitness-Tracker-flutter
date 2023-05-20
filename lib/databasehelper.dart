@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:final_project/screens/loginpage.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -272,9 +273,92 @@ Future<bool> checkpasswordExists(String pass ) async {
 
     return restrictedFoods.join(", ");
   }
+  Future<String> getNameById(int columnId) async {
+    DatabaseHelper databaseHelper = DatabaseHelper.instance;
+    final db = await databaseHelper.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      DatabaseHelper.table,
+      where: "${DatabaseHelper.columnId} = ?",
+      whereArgs: [columnId],
+      columns: [DatabaseHelper.columnName],
+      limit: 1,
+    );
+    if (maps.isNotEmpty) {
+      return maps.first[DatabaseHelper.columnName];
+    } else {
+      return null;
+    }
+
+  }
+  Future<String> getEmailById(int columnId) async {
+    DatabaseHelper databaseHelper = DatabaseHelper.instance;
+    final db = await databaseHelper.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      DatabaseHelper.table,
+      where: "${DatabaseHelper.columnId} = ?",
+      whereArgs: [columnId],
+      columns: [DatabaseHelper.columnemail],
+      limit: 1,
+    );
+    if (maps.isNotEmpty) {
+      return maps.first[DatabaseHelper.columnemail];
+    } else {
+      return null;
+    }
+  }
+  Future<String> getpasslById(int columnId) async {
+    DatabaseHelper databaseHelper = DatabaseHelper.instance;
+    final db = await databaseHelper.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      DatabaseHelper.table,
+      where: "${DatabaseHelper.columnId} = ?",
+      whereArgs: [columnId],
+      columns: [DatabaseHelper.password],
+      limit: 1,
+    );
+    if (maps.isNotEmpty) {
+      return maps.first[DatabaseHelper.password];
+    } else {
+      return null;
+    }
+  }
+  Future<int> getwaterlById(int columnId) async {
+    DatabaseHelper databaseHelper = DatabaseHelper.instance;
+    final db = await databaseHelper.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      DatabaseHelper.table,
+      where: "${DatabaseHelper.columnId} = ?",
+      whereArgs: [columnId],
+      columns: [DatabaseHelper.columnwater],
+      limit: 1,
+    );
+    if (maps.isNotEmpty) {
+      return maps.first[DatabaseHelper.columnwater];
+    } else {
+      return null;
+    }
+  }
+  Future<String> getdiseaselById(int columnId) async {
+    DatabaseHelper databaseHelper = DatabaseHelper.instance;
+    final db = await databaseHelper.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      DatabaseHelper.table,
+      where: "${DatabaseHelper.columnId} = ?",
+      whereArgs: [columnId],
+      columns: [DatabaseHelper.columndisease],
+      limit: 1,
+    );
+    if (maps.isNotEmpty) {
+      return maps.first[DatabaseHelper.columndisease];
+    } else {
+      return null;
+    }
+  }
 
 
 
 }
+
+
 
 

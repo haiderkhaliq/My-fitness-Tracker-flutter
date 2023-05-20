@@ -1,4 +1,5 @@
 import 'package:final_project/screens/loginpage.dart';
+import 'package:final_project/screens/profile.dart';
 import 'package:final_project/screens/questions.dart';
 import 'package:final_project/screens/waterdisplay.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,10 @@ import 'Doctorspage.dart';
 import 'Exercises.dart';
 import 'Timer.dart';
 import 'input_page.dart';
+String emaildisplay = '';
+String namedisplay = '';
+String passworddisplay = '';
+int waterdisplay = 0;
 
 class caloriedisplay extends StatefulWidget {
   @override
@@ -21,7 +26,6 @@ class _caloriedisplayState extends State<caloriedisplay> {
   TextEditingController _controller = TextEditingController();
   TextEditingController _controller1 = TextEditingController();
   TextEditingController _controller3 = TextEditingController();
-  TextEditingController _controller2 = TextEditingController();
   final dbHelper = DatabaseHelper.instance;
 
   String breakfast = 'hello';
@@ -31,7 +35,7 @@ class _caloriedisplayState extends State<caloriedisplay> {
   String Dinner = '';
   int calories11=0;
 
-  Map<String, double> dataMap = {"empty": 56};
+  Map<String, double> dataMap = {"empty": 0};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +51,21 @@ class _caloriedisplayState extends State<caloriedisplay> {
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 ),
+              ),
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text(
+                  "Profile Page",
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+                onTap: () {
+                  setState(() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => profile()),
+                    );
+                  });
+                },
               ),
               ListTile(
                 leading: Icon(Icons.home),
@@ -124,6 +143,21 @@ class _caloriedisplayState extends State<caloriedisplay> {
                   });
                 },
               ),
+              ListTile(
+                leading: Icon(Icons.logout),
+                title: Text(
+                  "Log Out",
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+                onTap: () {
+                  setState(() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => login()),
+                    );
+                  });
+                },
+              ),
             ],
           ),
         ),
@@ -149,7 +183,7 @@ class _caloriedisplayState extends State<caloriedisplay> {
                     chartRadius: 100.0,
                     dataMap: dataMap,
                     chartType: ChartType.ring,
-                    baseChartColor: Colors.grey,
+                    baseChartColor: Colors.black,
                   ),
                 ),
               ),
@@ -187,8 +221,9 @@ class _caloriedisplayState extends State<caloriedisplay> {
                 controller: _controller,
                 onSubmitted: (value) {
                   setState(()async {
-                     calories11 = await dbHelper.getCaloriesByName(value);
-                     breakfast=value;
+                    calories11 = await dbHelper.getCaloriesByName(value);
+                    breakfast=value;
+                    caloriesss='';
                   });
                 },
                 cursorColor: Colors.blue[900],
@@ -216,9 +251,9 @@ class _caloriedisplayState extends State<caloriedisplay> {
           ),
           Expanded(
               child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text("Submit"),
-          )),
+                padding: const EdgeInsets.all(10.0),
+                child: Text("Submit"),
+              )),
 
           //next lunch
           Expanded(
@@ -264,9 +299,9 @@ class _caloriedisplayState extends State<caloriedisplay> {
           ),
           Expanded(
               child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text("Submit"),
-          )),
+                padding: const EdgeInsets.all(10.0),
+                child: Text("Submit"),
+              )),
           //Dinner
           Expanded(
             child: SizedBox(
@@ -304,7 +339,7 @@ class _caloriedisplayState extends State<caloriedisplay> {
               ),
               onPressed: () {
                 setState(
-                  () {
+                      () {
                     dataMap[Dinner] = calories11.toDouble();
                   },
                 );

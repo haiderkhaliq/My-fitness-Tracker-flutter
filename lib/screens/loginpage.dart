@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:final_project/screens/caloriedisplay.dart';
 import 'package:final_project/screens/signupage.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,6 @@ import '../components/reusable_card.dart';
 import '../constants.dart';
 import '../databasehelper.dart';
 import 'greetingscreen.dart';
-
 int columnID=0;
 class login extends StatefulWidget {
   const login({Key key}) : super(key: key);
@@ -99,11 +99,11 @@ class _loginState extends State<login> {
                     bool passexists = await dbHelper.checkpasswordExists(passwordController.text);
                     Map<String, dynamic> result = await DatabaseHelper.instance
                         .checkEntryExists(nameController.text);
-                    if (result['exists']) {
+                    if (result['exists']&&passexists) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => greetingpage(),
+                          builder: (context) => caloriedisplay(),
                         ),
                       );
                       columnID = result['id'];

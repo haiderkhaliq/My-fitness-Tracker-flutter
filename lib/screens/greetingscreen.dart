@@ -608,3 +608,4 @@ class _greetingpageState extends State<greetingpage> {
     await DatabaseHelper.instance.insertAllIntoTabledisease(rows);
   }
 }
+

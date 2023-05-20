@@ -119,8 +119,11 @@ class _MyRegisterState extends State<MyRegister> {
                             child: IconButton(
                               color: Colors.white,
                               onPressed: () {
-                                setState(() {
+                                setState(() async{
                                   _insert();
+                                  Map<String, dynamic> result = await DatabaseHelper.instance
+                                      .checkEntryExists(nameController.text);
+                                  columnID = result['id'];
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
